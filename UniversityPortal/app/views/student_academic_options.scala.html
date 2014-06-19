@@ -1,0 +1,48 @@
+@(student: com.universityregistration.model.User.Student)
+
+@studentMain(student, nav="academics") {
+			<div class="col-md-9">
+				<h1 class="page-title">Academic Records</h1>    
+<div style="padding-top: 20px">
+ <div class= "row">
+	 <div class="col-md-3">
+	 <a href="@routes.AcademicsController.viewGradeReport(student.getID())" class="thumbnail">
+		  <figure style="margin: 0px auto;">
+			<img src ="@routes.Assets.at("images/mygrades_256.png")" alt="">
+			<figcaption><font size="4">My Grades</font></figcaption>
+		  </figure>
+		 </a>
+	 </div>
+	 <div class="col-md-3">
+		  <a href="@routes.AcademicsController.viewTranscripts(student.getID())" class="thumbnail">
+			<figure style="margin: 0px auto;">
+			<img src ="@routes.Assets.at("images/trans.png")" alt="">
+			<figcaption><font size="4">My Transcripts</font></figcaption>
+		  </figure>
+			
+		 </a>
+	 </div>
+	 </div>
+	 
+	 <div class="row">
+	 <div class="col-md-3">
+		  <a href="@routes.MyStudCourses.allMyCourses(student.getID())" class="thumbnail">
+			<figure style="margin: 0px auto;">
+				<img src ="@routes.Assets.at("images/schedule.png")" alt="">
+			<figcaption><font size="4">My Courses</font></figcaption>
+		  </figure>
+		 </a>
+	 </div>
+	 <div class="col-md-3">
+		  <a href="@routes.MyStudCourses.searchCatalogBlank(student.getID())" class="thumbnail">
+			<figure style="margin: 0px auto;">
+				<img src ="@routes.Assets.at("images/reg.png")" alt="">
+			<figcaption><font size="4">Register</font></figcaption>
+		  </figure>
+		 </a>
+	 </div>
+ </div> 
+ 
+ </div>
+ </div>
+}

@@ -1,0 +1,69 @@
+@(gradeForm: Form[MyProfCourses.GradeChangeForm], professor: com.universityregistration.model.User.Professor, roster: java.util.List[com.universityregistration.model.User.Student], csId: java.lang.Integer, gradeServ: com.universityregistration.model.Service.GradeReportService)
+@import helper._
+@import helper.twitterBootstrap._
+
+@professorMain(professor, nav="mycourses") {
+<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Gradebook</h1>
+				</div>
+
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>Student Grades</h2>
+<table class="table table-hover">
+<tr>
+	<th>Student Name</th>
+	<th style="text-align:center">Current Grade</th>
+	<th>Action</th>
+</tr>
+@for(student <- roster) {
+	<tr>
+	<td>
+		@student.getFirstName() @student.getLastName()
+	</td>
+	<td style="text-align:center">
+<p style="text-weight: bold">@gradeServ.getGradeReportForGivenStudentIdAndCourseSectionId(student.getID(), csId).getGrade()</p>
+</td>
+<td>
+<button class="btn btn-link btn-sm" data-toggle="modal" data-target="#@student.getID()">
+  Change
+</button>
+</td>
+</tr>
+<div class="modal fade" id="@student.getID()" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h5 class="modal-title">Grade Entry</h5>
+      </div>
+      <div class="modal-body">
+		    @helper.form(action = routes.MyProfCourses.changeGrade(student.getID(), csId)) {
+		
+		        <fieldset>
+		            <legend>Change Grade for Student: @student.getFirstName() @student.getLastName()</legend>
+				
+				@inputText(
+					gradeForm("grade"),
+		            'size -> 1,
+		            'maxlength -> 2,				
+		            '_label -> "",
+		            '_error -> gradeForm.globalError
+				)
+		   <button type="submit" class="btn btn-primary btn-sm">Save</button>
+		   }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+}
+</table>
+
+				<br>
+</div>
+</div>
+}

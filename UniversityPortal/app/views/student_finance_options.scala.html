@@ -1,0 +1,20 @@
+@(student: com.universityregistration.model.User.Student)
+
+@studentMain(student, nav="finance") {
+			<div class="col-md-9">
+				<h1 class="page-title">Finance</h1>    
+<div style="padding-top: 20px">
+ <div class= "row">
+	 <div class="col-md-3">
+		 <a href="@routes.BillController.blank(student.getID())" class="thumbnail">
+		  <figure style="margin: 0px auto;">
+			<img src ="@routes.Assets.at("images/bill.png")" alt="">
+			<figcaption><font size="4">My Bill Report</font></figcaption>
+		  </figure>
+		 </a>
+	 </div>
+	 </div>
+ 
+ </div>
+ </div> 
+}

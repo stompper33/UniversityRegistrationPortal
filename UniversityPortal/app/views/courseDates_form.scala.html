@@ -1,0 +1,89 @@
+@(courseDatesForm: Form[DatesController.SetDatesForm])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Create Catalog"), nav="datesOptions") {
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Manage Course Dates</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+
+    @helper.form(action = routes.DatesController.submitDates()) {
+    <legend>Course Dates Information</legend>        
+            <div class="row">
+			<div class="col-lg-4">	
+            @select(
+                courseDatesForm("catalogId"),
+                options = options(GeneralController.listOfAllCatalogId()),
+                '_default -> "--- Term ---",
+                'class -> "form-control",
+                'required -> "required",
+                '_label -> "Catalog *"
+            )
+</div></div>
+                        <div class="row">
+			<div class="col-lg-4">	
+		@inputText(
+			courseDatesForm("startDate"),
+            '_label -> "Course Start Date (yyyy-mm-dd) *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> courseDatesForm.globalError
+		)
+</div></div>
+
+                        <div class="row">
+			<div class="col-lg-4">	
+		@inputText(
+			courseDatesForm("endDate"),
+            '_label -> "Course End Date (yyyy-mm-dd) *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> courseDatesForm.globalError
+		)
+		</div></div>
+		                        <div class="row">
+			<div class="col-lg-4">	
+		@inputText(
+			courseDatesForm("firstDayToRegister"),
+            '_label -> "Registration Open Date (yyyy-mm-dd) *",
+            'class -> "form-control",
+            'placeholder -> "yyyy-mm-dd",
+            'required -> "required",
+            '_error -> courseDatesForm.globalError
+		)
+		</div></div>
+		                        <div class="row">
+			<div class="col-lg-4">	
+		@inputText(
+			courseDatesForm("lastDayToRegister"),
+            '_label -> "Registration Close Date (yyyy-mm-dd) *",
+            'placeholder -> "yyyy-mm-dd",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> courseDatesForm.globalError
+		)
+		</div></div>
+		                        <div class="row">
+			<div class="col-lg-4">	
+		@inputText(
+			courseDatesForm("lastDayToDropClasses"),
+            '_label -> "Last Day to Drop (yyyy-mm-dd) *",
+            'placeholder -> "yyyy-mm-dd",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> courseDatesForm.globalError
+		)
+		</div></div>
+		<br>
+            <button type="submit" class="btn btn-primary btn-md">Set Dates</button>
+			<a class ="btn btn-link" href="@routes.CourseOptions.loadOptions()">Cancel</a>
+<br>
+    }<br>
+</div>
+</div>
+}
+
+

@@ -1,0 +1,34 @@
+@(catalogList: java.util.HashMap[String,String], searchCatalogBoxForm: Form[MyProfCourses.SearchCatalogBox])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Form samples"), nav="courseOptions") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">View Courses</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>Course Catalog</h2>
+
+    @helper.form(action = routes.CourseOptions.adminCatSelectSubmit()) {
+			<div class="row">
+			<div class="col-md-3")
+            @select(
+                searchCatalogBoxForm("catalogId"),
+                options = options(GeneralController.listOfAllCatalogId()),
+                '_default -> "--- Term ---",
+                '_label -> "Catalog",
+                'class -> "form-control"
+            )
+            <br>
+            
+            
+            </div><br><button class="btn btn-primary btn-md" type="submit">Search</button>
+            <br></div>
+
+<br>
+}
+</div>
+</div>
+}

@@ -1,0 +1,20 @@
+@(studPhone: com.universityregistration.model.User.PhoneNumber, sid: java.lang.String)
+
+@adminMain2(Html("Phonenumber created!"), nav = "signup") {
+    
+    <h2>Phonenumber record created:</h2>
+    
+    <h6>Phone Number</h6>
+    
+    <p>
+        @studPhone.getPhonenumber()
+    </p>
+    
+	<h6>Type:</h6>
+	<p>
+		@studPhone.getType()
+	</p>
+	
+	<h6>SID</h6>
+	<p> @sid </p>
+}

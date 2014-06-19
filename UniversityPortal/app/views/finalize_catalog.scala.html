@@ -1,0 +1,40 @@
+@(catSearchForm: Form[CreateCatalog.CatSearch])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+Finalize catalog
+}
+@adminMain2(title, nav="wizard"){
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Finalize Course Offerings</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px"><br>
+
+@helper.form(action = routes.CreateCatalog.finalizeCatalog()) {
+
+           <legend>Finalize Catalog</legend>
+           
+            <div class="row">
+			<div class="col-lg-4">             
+           
+       @select(
+           catSearchForm("catId"), 
+           options = options(GeneralController.listOfAllCatalogId),
+           '_default -> "--- Catalog ---",
+           '_label -> "Course Id",
+           'class -> "form-control"
+       )
+       </div>
+       </div>
+       <br>
+<div class="actions">
+       <button type="submit" class="btn btn-primary btn-md">Finalize</button>
+<a class ="btn btn-link" href="@routes.CourseOptions.loadOptions()">Cancel</a>
+    </div>       
+}<br>
+</div>
+</div>
+}

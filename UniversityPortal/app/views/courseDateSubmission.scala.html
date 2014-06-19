@@ -1,0 +1,25 @@
+@(courseDateSub: com.universityregistration.model.RegDates.RegistrationDates, cid: Integer, form: DatesController.SetDatesForm)
+@adminMain2(Html("Form samples"), nav="datesOptions"){
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Manage Course Dates</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+
+<h1>Dates Successfully Set For:
+<table class ="table table-hover">
+<tr>
+<td>Start Date</td><td>@courseDateSub.getStartDate()</td></tr>
+<tr>
+<td>End Date</td><td>@courseDateSub.getEndDate()</td></tr>
+<tr>
+<td>Registration Opens</td><td>@courseDateSub.getFirstDayToRegister()</td></tr>
+<tr>
+<td>Registration Closes</td><td>@courseDateSub.getLastDayToRegister()</td></tr>
+<tr>
+<td>Final Day to Drop</td><td>@courseDateSub.getLastDayToDropClasses()</td></tr>
+</table><br>
+
+</div>
+</div>
+}

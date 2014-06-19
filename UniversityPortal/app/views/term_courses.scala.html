@@ -1,0 +1,40 @@
+@(allCourseListing: List[GeneralController.CourseListing])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Form samples"), nav="courseOptions") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+					<h1 class="page-title">Course Registration</h1>
+					
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>Current Course Offerings</h2>
+<table class="table table-hover">
+<tr>	
+	<th>Course Name</th>
+	<th>Day & Time</th>
+	<th>Location</th>
+	<th>Instructor</th>
+	<th>Status</th>
+</tr>
+@for(CourseListing <- allCourseListing){
+<tr>
+<td>@CourseListing.courseId - @CourseListing.cname <a href="@routes.CourseSelectionController.showCourseInfo(CourseListing.courseId)" target="_blank">more info</a></td>
+<td>@CourseListing.day @CourseListing.time</td>
+<td>@CourseListing.location</td>
+<td>@CourseListing.instructor</td>
+@{CourseListing.status match {
+    case "open" => <td><font color="green">open</font></td>
+    case "closed" => <td><font color="red">canceled</font></td>
+    case "canceled" => <td><font color="orange">close</font></td>
+}}
+</tr>
+<div>
+</div>
+}
+</table>
+</div><!-- end First widget -->
+</div><!-- CLOSE MAIN DIV -->
+}

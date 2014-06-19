@@ -1,0 +1,82 @@
+@(userForm: Form[com.universityregistration.model.User.User])
+@import helper._
+@import helper.twitterBootstrap._
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>YourPortal - User Log-in</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--
+    <link href="@routes.Assets.at("stylesheets/styles.css")" rel="stylesheet">
+    <link href="@routes.Assets.at("stylesheets/font-awesome.min.css")" rel="stylesheet">
+    <link href="@routes.Assets.at("stylesheets/adminia-1.1.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("stylesheets/adminia-1.1-responsive.css")" rel="stylesheet">
+       
+	
+	<link href="@routes.Assets.at("stylesheets/bootstrap-responsive.min.css")" rel="stylesheet">
+    -->
+	<link href="@routes.Assets.at("stylesheets/login.css")" rel="stylesheet"> 
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/styles.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+  </head>
+
+<body class="loginBody">
+	
+	    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header myheader">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Your UNIversity Portal</a>
+		  
+        </div><div class="navbar-brand pull-right">
+			<em>Please login to continue<em>
+		  </div>
+      </div>
+    </div>	
+
+
+<div id="login-container">
+	<div id="login-header">
+		<h3>Login</h3>
+	</div> <!-- /login-header -->
+	<div id="login-content" class="clearfix">
+	    @helper.form(action = routes.UserLogin.submit) {
+         <fieldset>
+             <p><input type="text" name="username" placeholder="username"></p>
+			<p><input type="password" name="password" placeholder="password"></p>
+         </fieldset>
+        <div class="actions" align="center">
+            <button type="submit" class="btn btn-warning">Login</button>
+        </div>
+    }			
+		</div> <!-- /login-content -->
+</div> <!-- /login-wrapper -->
+<!-- Le javascript
+================================================== -->
+        <!--
+		Bootstrap core JavaScript: Put at end to load document faster
+		-->
+		 <script src="@routes.Assets.at("javascripts/jquery-1.10.2.min.js")"></script>
+		
+		<script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+  </body>
+</html>

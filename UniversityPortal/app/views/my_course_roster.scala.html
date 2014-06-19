@@ -1,0 +1,32 @@
+@(professor: com.universityregistration.model.User.Professor, roster: java.util.List[com.universityregistration.model.User.Student], csId: java.lang.Integer)
+@import helper._
+@import helper.twitterBootstrap._
+
+@professorMain(professor, nav="mycourses") {
+<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Roster</h1>
+				</div>
+
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>Roster</h2>
+<table class="table table-hover">
+  <col width="50">
+  <col width="50">
+<tr>
+	<th>First Name</th>
+	<th>Last Name</th>
+</tr>
+@for(student <- roster) {
+<tr>
+<td>@student.getFirstName()</td>
+<td>@student.getLastName()</td>
+</tr>
+}
+</table>
+<a class="pull-right" href="@routes.MyProfCourses.getGradebookForGivenCourseSection(professor.getID(), csId)">Manage Grades</a>
+				<br>
+				<br>
+</div>
+</div>
+}

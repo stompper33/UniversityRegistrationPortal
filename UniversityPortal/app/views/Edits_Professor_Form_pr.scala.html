@@ -1,0 +1,83 @@
+@(professor: com.universityregistration.model.User.Professor, professorForm: Form[com.universityregistration.model.User.Professor])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Basic Professor Information
+}
+@professorMain(professor, nav="profile"){
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Edit Profile</h1>
+				</div>
+	<div class="contentWrapper">			
+
+	@helper.form(action = routes.EditProfessorController.updateBasicProfessorPR()){
+	
+	
+		<legend>My Personal Information</legend>
+		<div class="row">
+		<div class="col-lg-3">
+		@inputText(
+            professorForm("firstName"), 
+            '_label -> "First Name *",
+            'class -> "form-control",
+            '_error -> professorForm.globalError
+        )
+        </div>
+        <div class="col-lg-3">         
+		@inputText(
+            professorForm("lastName"),
+            '_label -> "Last Name *",
+            'class -> "form-control",
+            '_error -> professorForm.globalError
+        )
+        </div>        
+        </div>
+  
+        <div class="row">
+        <div class="col-lg-3">       
+		@inputText(
+            professorForm("dob"), 
+            '_label -> "Date of Birth *",
+            'class -> "form-control",
+            '_error -> professorForm.globalError
+        )
+        </div>
+        </div>
+        
+        <div class="row">
+        <div class="col-lg-3">
+		@inputText(
+			professorForm("ssn"),
+			'_label -> "Social Security No.",
+			'class -> "form-control",
+			'readonly -> "readonly",
+			'_error -> professorForm.globalError
+		)
+		</div>
+		</div><!--END row -->
+		
+		<div class ="row">
+		<div class="col-lg-3">
+		@inputText(
+			professorForm("department"),
+			'_label -> "Department *",
+			'class -> "form-control",
+			'_error -> professorForm.globalError
+		)
+		</div>
+		</div><!-- END row -->
+		
+		<br>
+
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Update</button>
+			<a class ="btn btn-link" href="@routes.EditProfessorController.backToProfProfileHomePR">Cancel</a>
+		</div><br>		
+
+	}
+</div>
+</div>	
+}

@@ -1,0 +1,42 @@
+@(professor: com.universityregistration.model.User.Professor, emailForm: Form[com.universityregistration.model.User.Email], roleType: java.lang.String)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add an E-mail
+}
+@professorMain(professor, nav="profile"){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Add Email</h1>
+				</div>
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.EditProfessorController.submitNewEmailPR()){
+	<legend>Email</legend>
+		<div class="row">
+		<div class="col-lg-3">	
+		
+		@inputText(
+            emailForm("email"), 
+            '_label -> "Email Address *", 
+            'class -> "form-control",
+            'type -> "email",
+            'required -> "required",
+            '_error -> emailForm.globalError
+         )
+		</div></div>
+		
+		<input type="hidden" name="type" value="@roleType">
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Save</button>
+			<a class ="btn btn-link" href="@routes.EditProfessorController.backToProfProfileHomePR">Cancel</a>
+		</div>
+		<br>
+	}
+</div>
+</div>	
+}

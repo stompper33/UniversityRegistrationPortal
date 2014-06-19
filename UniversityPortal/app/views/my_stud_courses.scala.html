@@ -1,0 +1,51 @@
+@(student: com.universityregistration.model.User.Student, courses: java.util.List[GeneralController.CourseListing], secCourses: java.util.List[GeneralController.CourseListing])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@studentMain(student, nav="academics") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">My Schedule</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>My Registered Courses</h2>
+<div class="pull-right"><p><span style="color: #4C787E">Enrolled: @courses.size()</span> <strong>|</strong> <span style="color: #4C787E">Alternatives: @secCourses.size()</span></p></div>
+<table class="table table-hover">
+<tr>
+	<th>Course Name</th>
+	<th>Day & Time</th>
+	<th>Location</th>
+	<th>Professor</th>
+	<th>Action</th>
+</tr>
+<tr><td colspan="5"><em>Current Courses<em></td></tr>
+@for(course <- courses){
+<tr class="success">
+<td>@course.courseId @course.cname</td>
+<td>@course.day @course.time</td>
+<td>@course.location</td>
+<td>@course.instructor</td>
+<td>
+@form(routes.MyStudCourses.unassignCourse(student.getID(), course.courseSectionId)) {
+<button class="btn btn-default btn-sm" type="submit">drop</button>}
+</td>
+</tr>
+}
+<tr><td colspan="5"><em>Alternative Courses<em></td></tr>
+@for(secCourse <- secCourses){
+<tr class="warning">
+<td>@secCourse.courseId @secCourse.cname</td>
+<td>@secCourse.day @secCourse.time</td>
+<td>@secCourse.location</td>
+<td>@secCourse.instructor</td>
+<td>
+@form(routes.MyStudCourses.unassignSecCourse(student.getID(), secCourse.courseSectionId)) {
+<button class="btn btn-default btn-sm" type="submit">drop</button>}
+</td>
+</tr>
+}
+</table>
+</div>
+</div>
+}

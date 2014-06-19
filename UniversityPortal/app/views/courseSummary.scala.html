@@ -1,0 +1,28 @@
+@(newCourse: com.universityregistration.model.Course.Course)
+
+@adminMain2(Html("Course Successfully Created!"), nav = "courseOptions") {
+   
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">New Student</h1>
+				</div>
+   <div class="contentWrapper"><br> 
+    <h2>Course Created For:</h2>
+    <h4>Name:</h4>
+    
+		<p>@newCourse.getCourseId() @newCourse.getCourseName()</p>
+	
+    <h4>Number of Credits:</h4>
+    
+		<p>@newCourse.getCourseCredits()</p>
+	
+    <h4>Description:</h4>
+    
+		<p>@newCourse.getCourseDescription()</p>
+    <h4>Prereqs. :</h4>
+    @for(Course <- newCourse.getPrereqs()){
+		<p>@Course.getCourseName()</p>
+		}<br>
+</div>
+</div>
+}

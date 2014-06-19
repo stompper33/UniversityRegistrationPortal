@@ -1,0 +1,65 @@
+@(professor: com.universityregistration.model.User.Professor, addressForm: Form[com.universityregistration.model.User.Address], roleType: java.lang.String, aid: java.lang.Integer)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add an address
+}
+@professorMain(professor, nav="profile"){
+	@helper.form(action = routes.EditProfessorController.submitEditedAddressPR(aid)){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Edit Addresses</h1>
+				</div>
+	<div class="contentWrapper"><br>
+
+		<legend>Address</legend>
+		<div class="row">
+		<div class="col-lg-6">			
+		@inputText(
+            addressForm("street"), 
+            '_label -> "Street *", 
+            'class -> "form-control",
+            '_error -> addressForm.globalError
+        )
+        </div></div>
+        		<div class="row">
+		<div class="col-lg-3">	
+		@inputText(
+            addressForm("city"), 
+            '_label -> "City *",
+            'class -> "form-control",
+            '_error -> addressForm.globalError
+        )
+        </div>
+		<div class="col-lg-2">	
+		@inputText(
+            addressForm("state"), 
+            '_label -> "State *", 
+            'class -> "form-control",
+            '_error -> addressForm.globalError
+        )
+        </div></div>
+        		<div class="row">
+		<div class="col-lg-3">	
+		@inputText(
+			addressForm("zip"),
+			'_label -> "Zip code *",
+			'class -> "form-control",
+			'_error -> addressForm.globalError
+		)
+		</div></div>
+		
+		<input type="hidden" name="type" value="@roleType">
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Update</button>
+			<a class ="btn btn-link" href="@routes.EditProfessorController.backToProfProfileHomePR">Cancel</a>
+		</div>
+		<br>
+	}
+</div>
+</div>	
+}

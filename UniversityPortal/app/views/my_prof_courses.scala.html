@@ -1,0 +1,46 @@
+@(professor: com.universityregistration.model.User.Professor, courses: java.util.List[GeneralController.CourseListing])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@professorMain(professor, nav="mycourses") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">My Courses</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>My Courses</h2>
+<div class="pull-right"><p><span style="color: #4C787E">Teaching Courses: @courses.size()</span></p></div>
+<table class="table table-hover">
+<col width="50%">
+<col width="30%">
+<tr>
+	<th>Course Name</th>
+	<th>When</th>
+	<th colspan="2" style="text-align:center">Action</th>
+</tr>
+@for(CourseListing <- courses) {
+<tr>
+<td>
+@CourseListing.courseId - @CourseListing.cname
+</td>
+<td>
+@CourseListing.day - @CourseListing.time
+</td>
+<td style="width: 5%">
+@form(routes.MyProfCourses.unassignCourse(professor.getID(), CourseListing.courseSectionId)) {
+                    <button class="btn btn-default btn-sm" type="submit">Remove</button>
+                }</td><td style="width: 5%">@form(routes.MyProfCourses.viewRoster(professor.getID(), CourseListing.courseSectionId)) {
+                    <button class="btn btn-default btn-sm" type="submit">Roster</button>
+                }</td>
+</tr>
+}
+</table>
+@form(routes.MyProfCourses.searchCatalogBlank(professor.getID())) {
+                    <button class="btn btn-primary btn-md" type="submit">Add Course</button>
+                }
+				<br>
+</div>
+</div>
+</div>
+}

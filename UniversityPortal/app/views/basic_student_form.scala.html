@@ -1,0 +1,99 @@
+@(studentForm: Form[com.universityregistration.model.User.Student])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Basic Student Information
+}
+@adminMain2(title, nav="studentOptions"){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">New Student</h1>
+				</div>
+				@if(flash.containsKey("fail")){
+				<div class="alert alert-danger">
+					<strong>SORRY!</strong> @flash.get("fail")
+				</div>
+				}
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.BasicStudent.submitBasicStudent()){
+
+		<legend>Student Information</legend>
+				<div class="row">
+		<div class="col-lg-4">
+		@inputText(
+            studentForm("firstName"), 
+            '_label -> "First Name *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> studentForm.globalError
+        )
+        </div>
+        <div class="col-lg-4">
+		@inputText(
+            studentForm("lastName"),
+            '_label -> "Last Name *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> studentForm.globalError
+        )
+        </div>
+        </div>
+        
+		<div class="row">
+		<div class="col-md-4">        
+		@inputText(
+            studentForm("dob"), 
+            '_label -> "Date of Birth *",            
+            'class -> "form-control",
+            '_error -> studentForm.globalError,
+            'required -> "required",
+            'placeholder -> "mm/dd/yyyy"
+        )
+        </div></div>
+        
+        		<div class="row">
+		<div class="col-lg-4">
+		@inputText(
+			studentForm("ssn"),
+			'_label -> "Social Security No. (9 digits max) *",
+			'class -> "form-control",
+			'_error -> studentForm.globalError,
+			'required -> "required",
+			'maxlength -> 9, 
+			'placeholder -> "#########"
+		)
+		</div></div>
+
+        		<div class="row">
+		<div class="col-lg-4">		
+		@inputText(
+			studentForm("major"),
+			'_label -> "Major *",
+			'class -> "form-control",
+			'required -> "required",
+			'_error -> studentForm.globalError
+		)
+		</div></div>
+		
+        		<div class="row">
+		<div class="col-lg-4">		
+		@select(
+			studentForm("classLevel"),
+			options = options("0" -> "Undergraduate", "1"->"Graduate"),
+			'_default -> "--- Choose a class level ---",
+            '_label -> "Class level *",
+            'required -> "required",
+            'class -> "form-control"			
+		)
+		</div></div>
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Save</button>
+			<a class ="btn btn-link" href="@routes.StudentOptions.loadOptions()">Cancel</a>
+		</div>
+	}<br>
+}

@@ -1,0 +1,96 @@
+@(courseForm: Form[com.universityregistration.model.Course.Course])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Create Course"), nav="courseOptions") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Create Course</h1>
+				</div>				
+<div class="contentWrapper" style="padding-top: 20px"><br>
+    @helper.form(action = routes.CreateCourse.submit()) {
+ 
+            <legend>General Information</legend>
+            <div class="row">
+			<div class="col-lg-4">				
+            @inputText(
+                courseForm("courseId"), 
+                '_label -> "Course ID *", 
+                '_help -> "Please enter a seven character name (e.g. COMP101)",
+                'class -> "form-control",
+                'required -> "required",
+                '_error -> courseForm.globalError
+            ) 
+			</div>
+			</div>
+			
+			<div class="row">
+			<div class="col-lg-4">
+            @inputText(
+                courseForm("courseName"), 
+                '_label -> "Course Name *",
+                'class -> "form-control",
+                'required -> "required",
+                '_error -> courseForm.globalError
+            )
+			</div>
+			</div>
+
+            <div class="row">
+            <div class="col-lg-4">
+            @select(
+                courseForm("credits"),
+                options = options("1" -> "1", "2" -> "2", "3" -> "3"),
+                '_default -> "--- Number of credits ---",
+                '_label -> "Credits *",
+                'required -> "required",
+                'class -> "form-control"
+            )
+			</div>
+			</div>
+			
+	        <div class="row">
+            <div class="col-lg-5">		
+			@textarea(
+			courseForm("courseDescription"),
+			args = 'rows -> 3, 'cols -> 50,
+			'_label -> "Description *",
+			'required -> "required",
+			'class -> "form-control"
+			)
+		    </div>
+		    </div>
+        <br>
+        <br>
+		<legend>Prerequisites</legend>
+		<div class="row">
+		<div class="col-md-3">
+		            @select(
+                courseForm("prereqs1"),
+                options = options(GeneralController.listOfAllCourseId),
+                '_default -> "--- Prerequisite 1 ---",
+                '_label -> "",
+                'class -> "form-control"
+            )
+            </div>
+            <div class="col-md-3">
+		            @select(
+                courseForm("prereqs2"),
+                options = options(GeneralController.listOfAllCourseId),
+                '_default -> "--- Prerequisite 2 ---",
+                '_label -> "",
+                'class -> "form-control"
+            )
+			</div>
+			</div>
+<br>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Create Course</button>
+			<a class ="btn btn-link" href="@routes.CourseOptions.loadOptions()">Cancel</a>
+        </div>
+        <br>
+}
+</div>
+</div>
+}

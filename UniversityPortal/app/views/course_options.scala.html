@@ -1,0 +1,54 @@
+@adminMain2(Html("Form samples"), nav="courseOptions") {
+			<div class="col-md-9">
+				<h1 class="page-title">Manage Course</h1>
+				
+			  
+<div style="padding-top: 20px; padding-left: 20px">
+<div class="container">
+	 <div class= "row">
+		 <div class="col-md-2">
+			 <a href="@routes.CreateCatalog.blank" class="thumbnail">
+				<img src ="@routes.Assets.at("images/catalog1.png")" alt="">
+				<p style="text-align: center; font-size: 18px">Create Catalog</p>
+			 </a>
+		 </div>
+		 <div class="col-md-2">
+			 <a href="@routes.CreateCatalog.viewFinalization" class="thumbnail">
+				<img src ="@routes.Assets.at("images/verify.png")" alt="">
+				<p style="text-align: center; font-size: 18px">Finalize Catalog</p>
+			 </a>
+		 </div>			 
+		 <div class="col-md-2">
+			 <a href="@routes.CreateCourse.blank" class="thumbnail">
+				<img src ="@routes.Assets.at("images/createCourse.png")" alt="">
+				<p style="text-align: center; font-size: 18px">Create Course</p>
+			 </a>
+		 </div>
+	</div>
+		
+	<div class= "row">
+		 <div class="col-md-2">
+			 <a href="@routes.EditCourse.allCourses" class="thumbnail">
+				<img src ="@routes.Assets.at("images/list.png")" alt="">
+				<p style="text-align: center; font-size: 18px">Courses</p>
+			 </a>
+		 </div>
+			 <div class="col-md-2">
+			 <a href="@routes.CourseOptions.adminCatalogSelectBlank()" class="thumbnail">
+				<img src ="@routes.Assets.at("images/unnamed.png")" alt="">
+				<p style="text-align: center; font-size: 18px">Course Offerings</p>
+			 </a>
+		 </div>			 
+		 <div class="col-md-2">
+			 <a href="@routes.CreateCourseSection.blank()" class="thumbnail">
+				<img src ="@routes.Assets.at("images/add_list.png")" alt="">
+				<p style="text-align: center; font-size: 18px">Create Course Offering</p>
+			 </a>
+		 </div>	 
+
+	</div>
+
+</div> 
+</div>
+</div>
+}

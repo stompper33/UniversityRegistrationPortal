@@ -1,0 +1,41 @@
+@(retStudent: com.universityregistration.model.User.Student, emailForm: Form[com.universityregistration.model.User.Email], roleType: java.lang.String, eid: java.lang.Integer)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add an E-mail
+}
+@studentMain(retStudent, nav="profile"){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Edit Email</h1>
+				</div>
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.EditStudentController.submitEditedEmailSR(eid)){
+
+		<legend>Email</legend>
+		<div class="row">
+		<div class="col-lg-3">
+		@inputText(
+            emailForm("email"), 
+            '_label -> "Email Address *", 
+            'class -> "form-control",
+            'type -> "email",
+            '_error -> emailForm.globalError
+         )
+		</div></div>
+
+		<input type="hidden" name="type" value="@roleType">
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Update</button>
+			<a class ="btn btn-link" href="@routes.EditStudentController.backToStudProfileHomeSR">Cancel</a>
+		</div>
+		<br>
+	}
+	</div>
+	</div>
+}

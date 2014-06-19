@@ -1,0 +1,28 @@
+@(professor: com.universityregistration.model.User.Professor, catalogList: java.util.HashMap[String,String], searchCatalogBoxForm: Form[MyProfCourses.SearchCatalogBox])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@professorMain(professor, nav="mycourses") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Course Registration</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px"><br>
+<h2>Course Catalog</h2>
+
+    @helper.form(action = routes.MyProfCourses.searchCatalogSubmit(professor.getID())) {
+
+            @select(
+                searchCatalogBoxForm("catalogId"),
+                options = options(GeneralController.listOfAllCatalogId()),
+                '_default -> "--- Term ---",
+                '_label -> "Catalog",
+                'class -> "form-control"
+            )
+<br>
+<button class="btn btn-primary btn-md" type="submit">Search</button>
+}<br>
+</div>
+</div>
+}

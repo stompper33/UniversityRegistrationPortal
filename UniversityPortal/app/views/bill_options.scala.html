@@ -1,0 +1,39 @@
+@(student: com.universityregistration.model.User.Student, studBillReports: HashMap[String, String], billSelectorForm: Form[BillController.BillSelector])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Billing Summary
+}
+@studentMain(student, nav="finance"){
+
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Course Registration</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px"><br>
+
+@helper.form(action = routes.BillController.generateBill()){
+	
+		<legend>Billing Information</legend>
+		<div class="row">
+		<div class="col-md-4">
+		@select(
+			billSelectorForm("billId"),
+			options = options(studBillReports),
+			'_default -> "--- Choose billing term ---",
+            '_label -> "Billing period",
+            'class -> "form-control"
+			
+		)
+		</div>
+		</div>
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Submit</button>
+		</div></br>
+	}
+</div>
+</div>
+}

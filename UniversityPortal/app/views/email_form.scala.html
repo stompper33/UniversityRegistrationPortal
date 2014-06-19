@@ -1,0 +1,40 @@
+@(emailForm: Form[com.universityregistration.model.User.Email], roleType: java.lang.String)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add an E-mail
+}
+@adminMain2(title, nav="studentOptions"){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Email Address</h1>
+				</div>	
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.StudentEmailController.submitEmail()){
+	
+		<div class="row">
+		<div class="col-lg-3">		
+		<legend>Email</legend>
+		@inputText(
+            emailForm("email"), 
+            '_label -> "Email Address *", 
+            'class -> "form-control",
+            'type -> "email",
+            '_error -> emailForm.globalError
+         )
+		</div>
+		</div>
+		<br>
+		<input type="hidden" name="type" value="@roleType">
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Save</button>
+		</div>
+		<br>
+	}
+	</div>
+	</div>
+}

@@ -1,0 +1,21 @@
+@(newCatalog: com.universityregistration.model.Course.CourseCatalog)
+
+@adminMain2(Html("Course Successfully Created!"), nav = "courseOptions") {
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Manage Course Dates</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+    
+    <h1>Successfully Created Course For:</h1>
+	
+    <h5>Term:</h5>
+		<p>@newCatalog.getTerm</p>
+	
+    <h5>Year:</h5>
+		<p>@newCatalog.getYear</p>
+
+</div>
+</div>
+}

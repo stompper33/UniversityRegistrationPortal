@@ -1,0 +1,42 @@
+@(user: com.universityregistration.model.User.User, username: String)
+
+@adminMain(Html("Form samples"), nav="courseOptions") {
+<div style="padding-top: 20px">
+<div class="container">
+	 <div class= "row">
+		 <div class="col-md-2">
+			 <a href="@routes.CreateCatalog.blank" class="thumbnail">
+				<img src ="http://placehold.it/300x300" alt="">
+				<p style="text-align: center; font-size: 18px">Create Catalog</p>
+			 </a>
+		 </div>
+		 <div class="col-md-2">
+			 <a href="@routes.CreateCourse.blank" class="thumbnail">
+				<img src ="http://placehold.it/300x300" alt="">
+				<p style="text-align: center; font-size: 18px">Create Course</p>
+			 </a>
+		 </div>
+		 <div class="col-md-2">
+			 <a href="#" class="thumbnail">
+				<img src ="http://placehold.it/300x300" alt="">
+				<p style="text-align: center; font-size: 18px">Add Course Section</p>
+			 </a>
+		 </div>
+		 <div class="col-md-2">
+			 <a href="#" class="thumbnail">
+				<img src ="http://placehold.it/300x300" alt="">
+				<p style="text-align: center; font-size: 18px">Edit Course Section</p>
+			 </a>
+		 </div>		 
+	 </div><!-- end first row -->
+	 <!--
+	 <div class= "row"> second row 
+		 <div class="col-md-2">
+			 <a href="@routes.CreateCourse.blank" class="thumbnail">
+				<img src ="http://placehold.it/300x300" alt="">
+				<p style="text-align: center; font-size: 18px">Create Course</p>
+			 </a>
+		 </div>
+	 </div>--><!-- end second row -->
+</div>
+}

@@ -1,0 +1,59 @@
+@(studentForm: Form[com.universityregistration.model.User.Student], roleType: java.lang.String, sid: java.lang.String)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Basic Student Information
+}
+@adminMain2(title, nav="wizard"){
+	@helper.form(action = routes.EditStudentController.updateBasicStudent()){
+	
+	<fieldset>
+		<legend>Student Information</legend>
+		<!--
+		<form id="studentForm" name="studentForm" method="post" action="">-->
+		@inputText(
+            studentForm("firstName"), 
+            '_label -> "First Name", 
+            '_help -> "First name required.",
+            '_error -> studentForm.globalError
+        )
+		@inputText(
+            studentForm("lastName"),
+            '_label -> "Last Name",
+            '_help -> "Last name required.",
+            '_error -> studentForm.globalError
+        )
+		@inputText(
+            studentForm("dob"), 
+            '_label -> "Date of Birth", 
+            '_help -> "Birthdate required.",
+            '_error -> studentForm.globalError
+        )
+		@inputText(
+			studentForm("ssn"),
+			'_label -> "Social Security No.",
+			'_help -> "Social security number required.",
+			'_error -> studentForm.globalError
+		)
+		@inputText(
+			studentForm("major"),
+			'_label -> "Major",
+			'_help -> "Major required.",
+			'_error -> studentForm.globalError
+		)
+		@select(
+			studentForm("classLevel"),
+			options = options("0" -> "undergraduate", "1"->"graduate"),
+			'_default -> "--- Choose a class level ---",
+            '_label -> "Class level"
+			
+		)
+		</fieldset>
+		
+		<div class="actions">
+			<input type="submit" name="action" class="btn primary" value="Save">
+		</div>
+	}
+}

@@ -1,0 +1,139 @@
+@(retProfessor: com.universityregistration.model.User.Professor)
+
+@import helper._
+
+@adminMain2(Html("Profile"), nav = "professorOptions") {
+   			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Professor Profile</h1>
+</div>				
+<div class="contentWrapper" style="padding-top: 20px">
+
+<!--UNorderedLIST for TABS -->
+<ul class="nav nav-tabs">
+  <li><a href="#personal_profile" data-toggle="tab">Personal Profile</a></li>
+  <li><a href="#address" data-toggle="tab">Address</a></li>
+  <li><a href="#phone" data-toggle="tab">Phone</a></li>
+  <li><a href="#email" data-toggle="tab">Email</a></li>
+</ul>
+
+<!--TAB CONTENT FOR TABS -->
+<div class="tab-content">
+
+	<div class="tab-pane active" id="personal_profile">
+
+		<h4>Personal Information</h4><br>
+		<table class= "table">
+			<col width="35%">
+		<tr><td><label>First Name:</label></td> <td>@retProfessor.getFirstName()</td></tr>
+		
+		<tr><td><label>Last Name:</label></td> <td>@retProfessor.getLastName()</td></tr>
+		
+		<tr><td><label>SSN:</label></td> <td><span style="font-size: 15px">*****</span>@retProfessor.getSsn().substring(5)</td></tr>
+		
+		<tr><td><label>Date of Birth:</label></td> <td>@retProfessor.getDob()</td></tr>
+		
+		<tr><td><label>Department:</label></td> <td>@retProfessor.getDepartment()</td></tr>
+		
+		<tr><td><br>@form(routes.EditProfessorController.editPersonalInfo(retProfessor.getSsn())){
+					<button class="btn btn-primary btn-md" type="submit">&nbsp; Edit &nbsp;</button>
+		}</td><td></td></tr>
+		</table>
+		<br>
+
+	</div>
+
+<div class="tab-pane" id="address">
+    <h4>Addresses</h4>
+    <table class = "table table-hover">
+    	<th>Street</th>
+    	<th>City</th>
+    	<th>State</th>
+    	<th>Zip</th>
+    	<th colspan="2"></th>
+    @for(a <- retProfessor.getAddress()){
+    	<tr>
+    		<td>@a.getStreet()</td>
+    		<td>@a.getCity()</td>
+    		<td>@a.getState()</td>
+    		<td>@a.getZip()</td>
+    		<td>
+    			@form(routes.EditProfessorController.editAddress(a.getAddressId())){
+    				<button type="submit" class="btn btn-default btn-sm">Edit</button>
+    			}    		
+    		</td>
+    		<td>
+    			@form(routes.EditProfessorController.delAddress(a.getAddressId())){
+    				<button type="submit" class="btn btn-default btn-sm">Remove</button>
+    			}
+    		</td>
+    	</tr>
+    }
+    </table>
+    @form(routes.EditProfessorController.createAddress()){
+    	<button class="btn btn-primary btn-md" type="submit">Add Address</button>
+    }<br>
+</div>
+
+<div class="tab-pane" id="phone">
+    <h4>Phone Contacts</h4>
+    <table class = "table table-hover">
+    	<th>Phone No.</th>
+    	<th colspan="2"></th>
+	    @for(p <- retProfessor.getPhoneNumber()){
+	    	<tr>
+	    		<td>@p.getPhonenumber()</td>
+	    		<td>
+	    			@form(routes.EditProfessorController.editPhone(p.getPhoneNumberId())){
+    					<button type="submit" class="btn btn-default btn-sm">Edit</button>
+    				}
+	    		</td>
+	    		<td>
+    				@form(routes.EditProfessorController.delPhone(p.getPhoneNumberId())){
+    				<button type="submit" class="btn btn-default btn-sm">Remove</button>
+    			}
+    			</td>
+	    	</tr>
+	    }<br>
+    </table>
+    <br>
+    @form(routes.EditProfessorController.createPhone()){
+    	<button class="btn btn-primary btn-md" type="submit">Add Phone</button>
+    }
+    <br>
+</div>
+
+<div class="tab-pane" id="email">
+    <h4>Email Contacts</h4>
+    <table class = "table table-hover">
+    	<th>Email</th>
+    	<th colspan="2"></th>
+    	@for(e <- retProfessor.getEmail()){
+    		<tr>
+    			<td>@e.getEmail()</td>
+    			<td>
+    				@form(routes.EditProfessorController.editEmail(e.getEmailId())){
+    					<button type="submit" class="btn btn-default btn-sm">Edit</button>
+    				}	
+    			</td>
+    			<td>
+    				@form(routes.EditProfessorController.delEmail(e.getEmailId())){
+    				<button type="submit" class="btn btn-default btn-sm">Remove</button>
+    			}
+    			</td>
+    		</tr>
+    	}
+    </table>
+    <br>
+    @form(routes.EditProfessorController.createEmail()){
+    	<button class="btn btn-primary btn-md" type="submit">Add Email</button>
+    }
+    <br>
+</div>
+
+
+</div><!--END OF Tab Content -->
+
+  </div><!-- END contentWrapper DIV - WHITEBACKGROUND -->
+</div><!--END col-md-9--MAIN DIV -->
+}

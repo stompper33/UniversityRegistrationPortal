@@ -1,0 +1,63 @@
+@(regDatesForm: Form[DatesController.SetDatesForm], allCatalogs: HashMap[String, String])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Create Catalog"), nav="datesOptions") {
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Manage Course Dates</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+
+    @helper.form(action = routes.DatesController.submitDates()) {
+
+        <fieldset>
+            <legend>Registration Dates Information</legend>
+            @select(
+	            regDatesForm("catId"),
+	            options = options(allCatalogs),
+	            '_label -> "Catalog",
+	            '_default -> "-- Choose Catalog --",
+	            '_error -> regDatesForm.globalError
+            )
+       @inputText(
+			regDatesForm("fdtr"),
+            '_label -> "Registration Opens",
+            '_error -> regDatesForm.globalError
+		)
+		@inputText(
+			regDatesForm("ldtr"),
+            '_label -> "Registration Closes",
+            '_error -> regDatesForm.globalError
+		)
+
+		@inputText(
+			regDatesForm("ldtdc"),
+            '_label -> "Final Day to Drop Classes",
+            '_error -> regDatesForm.globalError
+		)
+		
+		@inputText(
+			regDatesForm("sd"),
+            '_label -> "Start Date",
+            '_error -> regDatesForm.globalError
+		)
+		
+		@inputText(
+			regDatesForm("ed"),
+            '_label -> "End Date",
+            '_error -> regDatesForm.globalError
+		)
+		<br>
+            <button type="submit" class="btn btn-primary">Set Dates</button>
+			
+        </fieldset><br>
+    }
+</div>
+
+<a class ="btn btn-link" href="@routes.CourseOptions.loadOptions()">Cancel</a>
+
+}
+
+

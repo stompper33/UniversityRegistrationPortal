@@ -1,0 +1,71 @@
+@(phoneForm: Form[com.universityregistration.model.User.PhoneNumber], roleType: java.lang.String)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add a phone number
+}
+@adminMain2(title, nav = "studentOptions"){
+
+
+@if(roleType.equals("student")){
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Add Phone Contact</h1>
+				</div>
+	<div class="contentWrapper"><br>
+	@helper.form(action = routes.StudentPhoneController.submitPhone()){
+	
+		<legend>Phone Number</legend>
+		<div class="row">
+		<div class="col-lg-3">
+		@inputText(
+            phoneForm("phonenumber"), 
+            '_label -> "Phonenumber *", 
+            'class -> "form-control",
+            '_error -> phoneForm.globalError
+         )
+		
+		<input type="hidden" name="type" value="@roleType">
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Save</button>
+		</div>
+		<br>
+	}
+
+}else{
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Add Phone Contact</h1>
+				</div>
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.ProfessorPhoneController.submitPhone()){
+	
+		<legend>Phone Number</legend>
+		<div class="row">
+		<div class="col-lg-3">
+		@inputText(
+            phoneForm("phonenumber"), 
+            '_label -> "Phonenumber *", 
+            'class -> "form-control",
+            '_error -> phoneForm.globalError
+         )
+		
+		<input type="hidden" name="type" value="@roleType">
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Save</button>
+		</div>
+		<br>
+}
+
+
+
+}
+</div>
+</div>
+
+}

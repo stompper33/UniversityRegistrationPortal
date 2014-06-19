@@ -1,0 +1,72 @@
+@(retStudent: com.universityregistration.model.User.Student, addressForm: Form[com.universityregistration.model.User.Address], roleType: java.lang.String)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add an address
+}
+@studentMain(retStudent, nav="wizard"){
+	
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Add Address</h1>
+				</div>
+	<div class="contentWrapper"><br>
+	
+	@helper.form(action = routes.EditStudentController.submitNewAddressSR()){
+
+		<legend>Address</legend>
+		<div class="row">
+		<div class="col-lg-6">
+		@inputText(
+            addressForm("street"), 
+            '_label -> "Street *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> addressForm.globalError
+        )
+        </div></div>
+		<div class="row">
+		<div class="col-lg-3">        
+		@inputText(
+            addressForm("city"), 
+            '_label -> "City *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> addressForm.globalError
+        )
+        </div>
+		<div class="col-lg-2">
+		@inputText(
+            addressForm("state"), 
+            '_label -> "State *", 
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> addressForm.globalError
+        )
+        </div>        
+        </div>
+
+		<div class="row">
+		<div class="col-lg-3">
+		@inputText(
+			addressForm("zip"),
+			'_label -> "Zip code *",
+			'class -> "form-control",
+			'required -> "required",
+			'_error -> addressForm.globalError
+		)
+		</div></div>
+
+		<input type="hidden" name="type" value="@roleType">
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Save</button>
+			<a class ="btn btn-link" href="@routes.EditStudentController.backToStudProfileHomeSR()">Cancel</a> 
+		</div>
+		<br>
+	}
+</div>
+</div>	
+}

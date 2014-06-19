@@ -1,0 +1,49 @@
+@(student: com.universityregistration.model.User.Student, reportCard: List[GradeReportController.CustomGradeObj])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add an address
+}
+
+@studentMain(student, nav="academics"){
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">My Grades</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+@if(reportCard.isEmpty()){
+	<table class="table">
+		<th>Year</th>
+		<th>Term</th>
+		<th>Course</th>
+		<th>Instructor</th>
+		<th>Grade</th>
+		<tr><td colspan="5">You have no grade reports</td></tr>
+		</table>
+}else{
+<h4>Grade Report For: @reportCard.get(0).term @reportCard.get(0).year</h4>
+	<table class="table">
+		<th>Year</th>
+		<th>Term</th>
+		<th>Course</th>
+		<th>Instructor</th>
+		<th>Grade</th>
+		@for(CustomGradeObj <- reportCard){
+			<tr>
+				<td>@CustomGradeObj.year</td>
+				<td>@CustomGradeObj.term</td>
+				<td>@CustomGradeObj.coursename</td>
+				<td>@CustomGradeObj.instructorname</td>
+				<td>@CustomGradeObj.currentGrade</td>
+			</tr>
+		}
+	</table>
+	<a href="@routes.AcademicsController.diplayStudentAcademicOptions(student.getID())"><span class="glyphicon glyphicon-chevron-left"></span> back to academics</button>
+
+
+}	
+</div><br>
+</div>
+}

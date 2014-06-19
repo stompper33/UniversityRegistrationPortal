@@ -1,0 +1,46 @@
+@(course: com.universityregistration.model.Course.Course)
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Course Details</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/styles.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <style>
+	</style>
+	</head>
+	<script text="text/javascript">
+	function close_window() {
+    close();
+}
+</script>
+    <body>
+
+        <div class="container">  
+		<div class="courseInfo">
+		<div class="pull-right"><a href="#" onclick="close_window();return false;">Close</a></div>
+                <div class="page-header">
+                    <h2>Course Information: @course.getCourseId()</h2>
+                </div>
+                    
+                        <h4>Course Name</h4>
+							<p>@course.getCourseName()</p>
+						<h4>Description</h4>
+							<p>@course.getCourseDescription()</p>
+						<h4>Credits</h4>
+							<p>@course.getCourseCredits()</p>
+						<h4>Prerequisites</h4>
+							@for(c <- course.getPrereqs()){
+							<p>@c.getCourseId() - @c.getCourseName()</p>				
+							}<br>
+                    </div>
+                
+            </div>
+        </div>
+        
+    </body>
+</html>

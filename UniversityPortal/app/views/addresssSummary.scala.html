@@ -1,0 +1,34 @@
+@(studAddress: com.universityregistration.model.User.Address)
+
+@adminMain2(Html("Address added created!"), nav = "signup") {
+    
+    <h2>Address record created:</h2>
+    
+    <h6>Street</h6>
+    
+    <p>
+        @studAddress.getStreet()
+    </p>
+	
+    <h6>City</h6>
+    
+    <p>
+        @studAddress.getCity()
+    </p>
+	
+    <h6>State</h6>
+    
+    <p>
+        @studAddress.getState()
+    </p>
+	
+	<h6>Zip</h6>
+	<p>
+		@studAddress.getZip()
+	</p>    
+	
+	<h6>Type:</h6>
+	<p>
+		@studAddress.getType()
+	</p>
+}

@@ -1,0 +1,87 @@
+@(professorForm: Form[com.universityregistration.model.User.Professor])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Basic Professor Information
+}
+@adminMain2(title, nav="professorOptions"){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">New Professor</h1>
+				</div>
+				@if(flash.containsKey("fail")){
+				<div class="alert alert-danger">
+					<strong>SORRY!</strong> @flash.get("fail")
+				</div>
+				}
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.BasicProfessor.submitBasicProfessor()){
+	
+		<legend>Professor Information</legend>
+				<div class="row">
+		<div class="col-lg-4">
+		@inputText(
+            professorForm("firstName"), 
+            '_label -> "First Name *", 
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> professorForm.globalError
+        )
+        </div>
+        <div class="col-lg-4">
+		@inputText(
+            professorForm("lastName"),
+            '_label -> "Last Name *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> professorForm.globalError
+        )
+        </div>
+        </div>
+        
+		<div class="row">
+		<div class="col-md-4">        
+		@inputText(
+            professorForm("dob"), 
+            '_label -> "Date of Birth *",            
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> professorForm.globalError,
+            'placeholder -> "mm/dd/yyyy"
+        )
+        </div></div>
+        
+        		<div class="row">
+		<div class="col-lg-4">
+		@inputText(
+			professorForm("ssn"),
+			'_label -> "Social Security No. (9 digits) *",
+			'class -> "form-control",
+			'_error -> professorForm.globalError,
+			'required -> "required",
+			'maxlength -> 9, 
+			'placeholder -> "#########"
+		)
+		</div></div>
+				<div class="row">
+		<div class="col-lg-4">
+		@inputText(
+			professorForm("department"),
+			'_label -> "Department *",
+			'class -> "form-control",
+			'required -> "required",
+			'_error -> professorForm.globalError
+		)
+		</div></div>
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Save</button>
+			<a class ="btn btn-link" href="@routes.ProfessorOptions.loadOptions()">Cancel</a>
+		</div>
+	}<br>
+</div></div>
+}

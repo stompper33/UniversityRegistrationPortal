@@ -1,0 +1,18 @@
+@(studEmail: com.universityregistration.model.User.Email)
+
+@adminMain2(Html("Email added created!"), nav = "signup") {
+    
+    <h2>Email record created:</h2>
+    
+    <h6>Email:</h6>
+    
+    <p>
+        @studEmail.getEmail()
+    </p>
+	
+    <h6>Type</h6>
+    
+    <p>
+        @studEmail.getType()
+    </p>
+}

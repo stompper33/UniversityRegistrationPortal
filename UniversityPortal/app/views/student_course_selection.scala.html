@@ -1,0 +1,98 @@
+@(student: com.universityregistration.model.User.Student, scheduleForm: Form[MyStudCourses.ScheduleSelectBox], allCourseListing: List[GeneralController.CourseListing], myCourseListing: List[GeneralController.CourseListing], myStudSecCourses: List[GeneralController.CourseListing], catId: java.lang.Integer)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@studentMain(student, nav="academics") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+					<h1 class="page-title">Course Registration</h1>
+					
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>Current Course Offerings</h2>
+<table class="table table-hover">
+<tr>	
+	<th>Course Name</th>
+	<th>Day & Time</th>
+	<th>Location</th>
+	<th>Instructor</th>
+	<th>Status</th>
+	<th colspan="2">Action</th>
+</tr>
+@for(CourseListing <- allCourseListing){
+<tr>
+<td>@CourseListing.courseId - @CourseListing.cname <a style="font-size: 12px" href="@routes.CourseSelectionController.showCourseInfo(CourseListing.courseId)" target="_blank">more info</a></td>
+<td>@CourseListing.day @CourseListing.time</td>
+<td>@CourseListing.location</td>
+<td>@CourseListing.instructor</td>
+	@{CourseListing.status match {
+	    case "open" => <td><font color="green">open</font></td>
+	    case "closed" => <td><font color="orange">closed</font></td>
+	    case "canceled" => <td><font color="red">canceled</font></td>
+	}}
+
+			@if(GeneralController.containsCourse(myCourseListing, CourseListing) || GeneralController.containsCourse(myStudSecCourses, CourseListing)){
+				<td colspan="2">Registered</td>
+				}else{
+					@if((CourseListing.status.equals("canceled")) || (CourseListing.status.equals("closed"))){
+						<td colspan="2"></td>
+					}else{
+				@form(routes.MyStudCourses.assignCourse(student.getID(), CourseListing.courseSectionId, catId)) {
+					<td>
+					@select(
+						scheduleForm("schedule"),
+						options("primary" -> "Primary", "secondary" -> "Secondary"),
+						'_label -> ""
+					)			
+				</td>
+				<td><button class="btn btn-default btn-sm" type="submit">add</button>}</td>
+				}
+			}
+</tr>
+}	
+</table>
+</div><!-- end First widget -->
+
+<br>
+
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>My Registered Courses</h2>
+<table class="table table-hover">
+<tr>
+	<th>Course Name</th>
+	<th>Day & Time</th>
+	<th>Location</th>
+	<th>Professor</th>
+	<th>Action</th>
+</tr>
+<tr><td colspan="5"><em>Current Courses</em></td></tr>
+@for(course <- myCourseListing){
+<tr class="success">
+<td>@course.courseId @course.cname</td>
+<td>@course.day @course.time</td>
+<td>@course.location</td>
+<td>@course.instructor</td>
+<td>
+@form(routes.MyStudCourses.unassignCourse(student.getID(), course.courseSectionId)) {
+<button class="btn btn-default btn-sm" type="submit">drop</button>}
+</td>
+</tr>
+}
+<tr><td colspan="5"><em>Secondary Courses</em></td></tr>
+@for(secCourse <- myStudSecCourses){
+<tr class="warning">
+<td>@secCourse.courseId @secCourse.cname</td>
+<td>@secCourse.day @secCourse.time</td>
+<td>@secCourse.location</td>
+<td>@secCourse.instructor</td>
+<td>
+@form(routes.MyStudCourses.unassignSecCourse(student.getID(), secCourse.courseSectionId)) {
+<button class="btn btn-default btn-sm" type="submit">drop</button>}
+</td>
+</tr>
+}
+</table>
+</div><!--END Second widget -->
+</div><!-- CLOSE MAIN DIV -->
+}

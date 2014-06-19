@@ -1,0 +1,274 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           				controllers.Application.index()
+
+#login- REDIRECT to AMIN, STAFF, or STUDENT Portal
+POST	/login/submit								controllers.UserLogin.submit()
+
+# User Dashboard home when clicked
+GET		/admin_dash_home/dash						controllers.Application.goToAmdinDash()
+
+# ADMINISTRATION Routes
+
+# ADMIN Sidebar Options
+GET		/mng_students								controllers.StudentOptions.loadOptions()
+GET		/mng_professors								controllers.ProfessorOptions.loadOptions()
+GET		/mng_courses								controllers.CourseOptions.loadOptions()
+GET		/mng_dates									controllers.DateOptions.loadOptions()
+
+# ADMIN Manage Course Start-End Dates (set the dates for courses)
+GET		/mng_dates/course_dates						controllers.DatesController.setDatesBlank()
+POST	/mng_dates/course_dates/submit				controllers.DatesController.submitDates()
+
+
+# ADMIN Manage Course (Create, Edit)
+GET /mng_courses/create_course							controllers.CreateCourse.blank()
+POST /mng_courses/create_course/submit					controllers.CreateCourse.submit()
+GET /mng_courses/all_courses							controllers.EditCourse.allCourses()
+GET /mng_courses/edit_course/info/:courseId				controllers.EditCourse.editCourse(courseId: String)
+GET /mng_courses/edit_course/submitChanges				controllers.EditCourse.submitChanges()
+GET /mng_courses/edit_course/deleteCourse/:courseId		controllers.EditCourse.deleteCourse(courseId: String)
+
+# ADMIN Manage Course Sections (Create, Edit)
+GET /mng_courses/create_course_section					controllers.CreateCourseSection.blank()
+POST /mng_courses/create_course_section/submit			controllers.CreateCourseSection.submit()
+
+
+# ADMIN Manage Catalog
+GET /mng_courses/create_catalog						controllers.CreateCatalog.blank()
+GET /mng_courses/create_catalog/submit				controllers.CreateCatalog.submit()
+
+# ADMIN Finalize Catalog
+GET		/mng_catalog/finalize						controllers.CreateCatalog.viewFinalization()
+POST	/mng_catalog/finalize/submit				controllers.CreateCatalog.finalizeCatalog()
+
+
+
+# PROFESSOR Routes ################################################################################
+
+# PROF Sidebar Options
+GET		/mng_mycourses/id								controllers.MyProfCourses.allMyCourses(id: String)
+POST	/mng_mycourses/remove_course					controllers.MyProfCourses.unassignCourse(profId: String, cid: Integer)
+GET		/mng_mycourses/search/:profId					controllers.MyProfCourses.searchCatalogBlank(profId: String)
+GET		/prof_register/search/:profId					controllers.MyProfCourses.searchCatalogBlank(profId: String)
+POST	/mng_mycourses/search/submit/:profId			controllers.MyProfCourses.searchCatalogSubmit(profId: String)
+POST	/course_offerings/course_info/add				controllers.MyProfCourses.assignCourse(profId: String, courseSectionId: Integer)
+GET		/course_offerings/course_info/:courseId			controllers.CourseSelectionController.showCourseInfo(courseId: String)
+
+
+# PROF get course rosters info
+POST		/my_courses/roster			controllers.MyProfCourses.viewRoster(profId: java.lang.String, csId: java.lang.Integer)
+
+# PROF get course gradebook for a given course
+GET		/my_courses/roster/gradebook				controllers.MyProfCourses.getGradebookForGivenCourseSection(profId: java.lang.String, csId: java.lang.Integer)
+POST		/my_courses/roster/gradebook/change_grade			controllers.MyProfCourses.changeGrade(studId: java.lang.String, csId: java.lang.Integer)
+# PROF homepage when dashboard clicked
+GET		/professor_dash/profId						controllers.UserLogin.professorHome(profId: java.lang.String)
+
+# STUD Sidebar Options
+GET		/mng_mystudcourses/id						controllers.MyStudCourses.allMyCourses(id: java.lang.String)
+GET		/student_dash/studId								controllers.UserLogin.studentHome(studId: java.lang.String)
+
+# STUD SEE ALL, DROP, ADD Courses
+POST	/mng_mystudcourses/drop_course					controllers.MyStudCourses.unassignCourse(studId: java.lang.String, csId: java.lang.Integer)
+POST	/mng_mystudcourses/drop_secondayr_course		controllers.MyStudCourses.unassignSecCourse(studId: java.lang.String, csId: java.lang.Integer)
+GET		/mng_mystudcourses/search/studId				controllers.MyStudCourses.searchCatalogBlank(studId: java.lang.String)
+POST	/mng_mystudcourses/search/submit/:studId		controllers.MyStudCourses.searchCatalogSubmit(studId: java.lang.String)
+GET		/stud_course_offerings/course_info/:courseId 	controllers.MyStudCourses.showCourseInfo(courseId: java.lang.String)
+POST	/stud_course_offerings/course_info/add			controllers.MyStudCourses.assignCourse(studId: java.lang.String, courseSectionId: java.lang.Integer, catId: java.lang.Integer)
+
+
+
+
+
+
+
+###############################################################################################
+####################################################################################################################################################################################################################
+
+
+################################################################################################
+# STUDENT CREATION
+GET     /admin/create_student	            controllers.BasicStudent.blank()
+POST 	/admin/enrollStudent				controllers.BasicStudent.submitBasicStudent()
+
+#student address creation - tested
+POST	/admin/addAddressStudent						controllers.StudentAddressController.submitAddress()
+GET		/admin/addressStud/:id					controllers.StudentAddressController.blank(id: java.lang.String)
+
+#student email creation - tested
+POST	/admin/addEmailStudent							controllers.StudentEmailController.submitEmail()
+GET		/admin/emailStud/:id					controllers.StudentEmailController.blank(id: java.lang.String)
+
+#student phonenumber creation - tested
+POST	/admin/addPhoneStudent							controllers.StudentPhoneController.submitPhone()
+GET		/admin/phoneStud/:id					controllers.StudentPhoneController.blank(id: java.lang.String)
+
+
+# STUDENT EDITING -- ADMIN DRIVEN
+GET		/admin/editStud				controllers.EditStudentController.blank2()
+#GET		/admin/searchStud			controllers.EditStudentController.getStudentInfo()
+GET		/stud/profile/:sid			controllers.EditStudentController.getStudentProfile(sid: java.lang.String)
+POST	/admin/updateStud			controllers.EditStudentController.updateBasicStudent()
+POST	/stud/update				controllers.EditStudentController.updateBasicStudentSR()
+
+
+#go to edit forms
+GET		/admin/editAddressStud/:aid				controllers.EditStudentController.editAddress(aid: java.lang.Integer)
+GET		/stud/editAddress/:aid					controllers.EditStudentController.editAddressSR(aid: java.lang.Integer)
+GET		/admin/editPersonalStud/:sid			controllers.EditStudentController.editPersonalInfo(sid: java.lang.String)
+GET		/stud/editPersonal/:sid					controllers.EditStudentController.editPersonalInfoSR(sid: java.lang.String)
+GET		/admin/editPhoneStud/:pid				controllers.EditStudentController.editPhone(pid: java.lang.Integer)
+GET		/stud/editPhone/:pid					controllers.EditStudentController.editPhoneSR(pid: java.lang.Integer)
+GET		/admin/editEmailStud/:eid				controllers.EditStudentController.editEmail(eid: java.lang.Integer)
+GET		/stud/editEmail/:eid					controllers.EditStudentController.editEmailSR(eid: java.lang.Integer)
+
+#submit edited forms
+POST	/admin/submitAddressModStud/:aid		controllers.EditStudentController.submitEditedAddress(aid: java.lang.Integer)
+POST	/stud/submitAddressMod/:aid		controllers.EditStudentController.submitEditedAddressSR(aid: java.lang.Integer)
+POST	/admin/submitEmailModStud/:eid		controllers.EditStudentController.submitEditedEmail(eid: java.lang.Integer)
+POST	/stud/submitEmailMod/:eid		controllers.EditStudentController.submitEditedEmailSR(eid: java.lang.Integer)
+POST	/admin/submitPhoneModStud/:pid		controllers.EditStudentController.submitEditedPhone(pid: java.lang.Integer)
+POST	/stud/submitPhoneMod/:pid		controllers.EditStudentController.submitEditedPhoneSR(pid: java.lang.Integer)
+
+#delete personal records forms
+POST	/admin/deleteAddressStud/:aid			controllers.EditStudentController.delAddress(aid: java.lang.Integer)
+POST 	/admin/deleteEmailStud/:eid				controllers.EditStudentController.delEmail(eid: java.lang.Integer)
+POST	/admin/deletePhoneStud/:pid				controllers.EditStudentController.delPhone(pid: java.lang.Integer)
+POST	/stud/deleteAddress/:aid				controllers.EditStudentController.delAddressSR(aid: java.lang.Integer)
+POST 	/stud/deleteEmail/:eid					controllers.EditStudentController.delEmailSR(eid: java.lang.Integer)
+POST	/stud/deletePhone/:pid					controllers.EditStudentController.delPhoneSR(pid: java.lang.Integer)
+
+#create new record
+GET		/admin/createAddressStud				controllers.EditStudentController.createAddress()
+GET		/admin/createEmailStud					controllers.EditStudentController.createEmail()
+GET		/admin/createPhoneStud					controllers.EditStudentController.createPhone()
+GET		/stud/createAddress						controllers.EditStudentController.createAddressSR()
+GET		/stud/createEmail						controllers.EditStudentController.createEmailSR()
+GET		/stud/createPhone						controllers.EditStudentController.createPhoneSR()
+
+POST	/admin/addressAddStud					controllers.EditStudentController.submitNewAddress()
+POST	/admin/emailAddStud						controllers.EditStudentController.submitNewEmail()
+POST	/admin/phoneAddStud						controllers.EditStudentController.submitNewPhone()
+POST	/stud/addressAdd						controllers.EditStudentController.submitNewAddressSR()
+POST	/stud/emailAdd							controllers.EditStudentController.submitNewEmailSR()
+POST	/stud/phoneAdd							controllers.EditStudentController.submitNewPhoneSR()
+
+
+#grade report oriented -- STUDENT DRIVEN
+GET		/stud/academicOptions/:sid			controllers.AcademicsController.diplayStudentAcademicOptions(sid: java.lang.String)
+GET		/stud/grades/:sid					controllers.AcademicsController.viewGradeReport(sid: java.lang.String)
+GET		/stud/transcripts/:sid				controllers.AcademicsController.viewTranscripts(sid: java.lang.String)
+GET		/stud/viewGrades/:sid				controllers.GradeReportController.displayReportCard(sid: java.lang.String)
+GET		/stud/viewTranscripts/:sid			controllers.GradeReportController.displayTranscripts(sid: java.lang.String)
+
+
+
+
+
+#BILLING - FINANCES
+GET		/stud/financeOptions/:sid			controllers.BillController.displayStudentFinanceOptions(sid: java.lang.String)
+GET		/stud/billing/:sid					controllers.BillController.blank(sid: java.lang.String)
+GET		/stud/billsummary					controllers.BillController.generateBill()
+
+###########################################################################################################
+
+# PROFESSOR CREATION
+GET		/admin/create_professor				controllers.BasicProfessor.blank()
+POST	/admin/enrollProfessor				controllers.BasicProfessor.submitBasicProfessor()
+
+#professor address creation - tested
+POST	/admin/addingAddress		controllers.ProfessorAddressController.submitAddress()
+GET		/admin/addressProf/:id			controllers.ProfessorAddressController.blank(id: java.lang.String)
+
+#professor email creation - tested
+POST	/admin/addingEmail			controllers.ProfessorEmailController.submitEmail()
+GET		/admin/emailProf/:id			controllers.ProfessorEmailController.blank(id: java.lang.String)
+
+#professor phonenumber creation - tested
+POST	/admin/addingPhone			controllers.ProfessorPhoneController.submitPhone()
+GET		/admin/phoneProf/:id			controllers.ProfessorPhoneController.blank(id: java.lang.String)
+
+
+# PROFESSOR EDIT
+GET		/admin/editProf				controllers.EditProfessorController.blank2()
+#GET		/admin/searchProf				controllers.EditProfessorController.getProfessorInfo()
+GET		/prof/profile/:pid				controllers.EditProfessorController.getProfessorInfoPR(pid: java.lang.String)
+POST	/admin/updateProf				controllers.EditProfessorController.updateBasicProfessor()
+POST	/prof/update				controllers.EditProfessorController.updateBasicProfessorPR()
+
+#go to edit forms -- getting editing views
+GET		/admin/editPersonalProf/:sid	controllers.EditProfessorController.editPersonalInfo(sid: java.lang.String)
+GET		/prof/editPersonal/:pid			controllers.EditProfessorController.editPersonalInfoPR(pid: java.lang.String)
+GET		/admin/editAddressProf/:id		controllers.EditProfessorController.editAddress(id: java.lang.Integer)
+GET		/admin/editPhoneProf/:pid		controllers.EditProfessorController.editPhone(pid: java.lang.Integer)
+GET		/admin/editEmailProf/:eid		controllers.EditProfessorController.editEmail(eid: java.lang.Integer)
+GET		/prof/editAddress/:id			controllers.EditProfessorController.editAddressPR(id: java.lang.Integer)
+GET		/prof/editPhone/:pid			controllers.EditProfessorController.editPhonePR(pid: java.lang.Integer)
+GET		/prof/editEmail/:eid			controllers.EditProfessorController.editEmailPR(eid: java.lang.Integer)
+
+#submit edited forms
+POST	/admin/submitAddressModProf/:profId		controllers.EditProfessorController.submitEditedAddress(profId: java.lang.Integer)
+POST	/admin/submitEmailModProf/:profId		controllers.EditProfessorController.submitEditedEmail(profId: java.lang.Integer)
+POST	/admin/submitPhoneModProf/:profId		controllers.EditProfessorController.submitEditedPhone(profId: java.lang.Integer)
+POST	/prof/submitAddressMod/:profId		controllers.EditProfessorController.submitEditedAddressPR(profId: java.lang.Integer)
+POST	/prof/submitEmailMod/:profId		controllers.EditProfessorController.submitEditedEmailPR(profId: java.lang.Integer)
+POST	/prof/submitPhoneMod/:profId		controllers.EditProfessorController.submitEditedPhonePR(profId: java.lang.Integer)
+
+#new personal records forms
+POST	/admin/deleteAddressProf/:aid			controllers.EditProfessorController.delAddress(aid: java.lang.Integer)
+POST 	/admin/deleteEmailProf/:eid				controllers.EditProfessorController.delEmail(eid: java.lang.Integer)
+POST	/admin/deletePhoneProf/:pid				controllers.EditProfessorController.delPhone(pid: java.lang.Integer)
+POST	/prof/deleteAddress/:aid				controllers.EditProfessorController.delAddressPR(aid: java.lang.Integer)
+POST 	/prof/deleteEmail/:eid					controllers.EditProfessorController.delEmailPR(eid: java.lang.Integer)
+POST	/prof/deletePhone/:pid					controllers.EditProfessorController.delPhonePR(pid: java.lang.Integer)
+
+#create new record
+GET		/admin/createAddressProf			controllers.EditProfessorController.createAddress()
+GET		/admin/createEmailProf				controllers.EditProfessorController.createEmail()
+GET		/admin/createPhoneProf			controllers.EditProfessorController.createPhone()
+GET		/prof/createAddress						controllers.EditProfessorController.createAddressPR()
+GET		/prof/createEmail						controllers.EditProfessorController.createEmailPR()
+GET		/prof/createPhone						controllers.EditProfessorController.createPhonePR()
+
+
+POST	/admin/addressAddProf					controllers.EditProfessorController.submitNewAddress()
+POST	/admin/emailAddProf						controllers.EditProfessorController.submitNewEmail()
+POST	/admin/phoneAddProf						controllers.EditProfessorController.submitNewPhone()
+POST	/prof/addressAdd						controllers.EditProfessorController.submitNewAddressPR()
+POST	/prof/emailAdd							controllers.EditProfessorController.submitNewEmailPR()
+POST	/prof/phoneAdd							controllers.EditProfessorController.submitNewPhonePR()
+
+
+# ADMIN backToProfileHome routes -- 12/01/2013
+GET		/admin/stud_profile		controllers.EditStudentController.backToStudProfileHome()
+GET		/admin/prof_profile		controllers.EditProfessorController.backToProfProfileHome()
+GET		/prof/my_profile		controllers.EditProfessorController.backToProfProfileHomePR()
+GET		/stud/my_profile		controllers.EditStudentController.backToStudProfileHomeSR()
+
+#Student List (look at the default values for pagination parameters)
+GET     /mng_students/allStudents	           controllers.EditStudentController.studList(s: java.lang.String ?="lastName", o: java.lang.String ?="asc", f: java.lang.String ?= "")
+GET		/mng_students/searchStudent/:s			controllers.EditStudentController.getStudentInfo2(s: java.lang.String)
+
+
+#Professor List (look at the default values for pagination parameters)
+GET     /mng_professor/allProfessors	        controllers.EditProfessorController.profList(s: java.lang.String ?="lastName", o: java.lang.String ?="asc", f: java.lang.String ?= "")
+GET		/mng_professor/searchProfessor/:s			controllers.EditProfessorController.getProfessorInfo2(s: java.lang.String)
+
+#Admin courseSection Options
+GET		/mng_courses/course_section/search		controllers.CourseOptions.adminCatalogSelectBlank()
+GET		/mng_courses/course_section/search/submit	controllers.CourseOptions.adminCatSelectSubmit()
+
+
+#Admin create user Professor and Student
+GET     /admin/create_professor/user_creds/:profId	    controllers.ProfessorCredentialsController.blank(profId: java.lang.String)
+POST 	/admin/create_professor/user_creds/submit		controllers.ProfessorCredentialsController.submitCredentials()
+
+GET     /admin/create_student/user_creds/:studId	    controllers.StudentCredentialsController.blank(studId: java.lang.String)
+POST 	/admin/create_student/user_creds/submit			controllers.StudentCredentialsController.submitCredentials()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)	

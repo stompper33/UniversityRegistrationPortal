@@ -1,0 +1,47 @@
+@(courses: java.util.List[com.universityregistration.model.Course.Course], courseForm: Form[com.universityregistration.model.Course.Course])
+)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Edit Courses"), nav="courseOptions") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Edit Course</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+<h1>All Courses</h1>
+<table class="table table-hover">
+<tr>
+	<th>Course Name</th>
+	<th>Credits</th>
+	<th>Description</th>
+	<th>Action</th>
+</tr>
+@for(Course <- courses) {
+<tr>
+<td>
+@Course.getCourseId  -  @Course.getCourseName()
+</td>
+<td>
+@Course.getCourseCredits()
+</td>
+<td>
+@Course.getCourseDescription()
+</td>
+<td>
+@form(routes.EditCourse.editCourse(Course.getCourseId())) {
+                    <input type="submit" value="edit">
+                }
+@form(routes.EditCourse.deleteCourse(Course.getCourseId())){
+					<input type="submit" value="delete">
+}
+
+</td>
+</tr>
+}
+</table>
+</div>
+</div>
+</div>
+}

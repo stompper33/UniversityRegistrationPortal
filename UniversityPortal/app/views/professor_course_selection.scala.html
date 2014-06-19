@@ -1,0 +1,73 @@
+@(professor: com.universityregistration.model.User.Professor, allCourseListing: List[GeneralController.CourseListing], myCourseListing:List[GeneralController.CourseListing])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@professorMain(professor, nav="mycourses") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+					<h1 class="page-title">Course Registration</h1>
+					
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+<h2>Current Course Offerings</h2>
+<table class="table table-hover">
+<tr>	
+	<th>Course Name</th>
+	<th>Day & Time</th>
+	<th>Location</th>
+	<th>Instructor</th>
+	<th>Status</th>
+	<th>Action</th>
+</tr>
+@for(CourseListing <- allCourseListing){
+<tr>
+<td>@CourseListing.courseId - @CourseListing.cname <a href="@routes.CourseSelectionController.showCourseInfo(CourseListing.courseId)" target="_blank">more info</a></td>
+<td>@CourseListing.day @CourseListing.time</td>
+<td>@CourseListing.location</td>
+<td>@CourseListing.instructor</td>
+@{CourseListing.status match {
+    case "open" => <td><font color="green">open</font></td>
+    case "close" => <td><font color="red">canceled</font></td>
+    case "canceled" => <td><font color="orange">close</font></td>
+}}
+
+
+			@if(GeneralController.containsCourse(myCourseListing, CourseListing)){
+				<td>Registered</td>
+				}else{
+				<td>@form(routes.MyProfCourses.assignCourse(professor.getID(), CourseListing.courseSectionId)) {
+					&nbsp;<button class="btn btn-default btn-sm" type="submit">add</button>}</td>				
+			}
+
+
+</tr>
+<div>
+</div>
+}
+</table>
+</div><!-- end First widget -->
+
+<div class="contentWrapper" style="padding-top: 20px">
+	<h3>My Registered Courses</h3>
+	<table class="table table-hover">
+<tr>	
+	<th>Course Name</th>
+	<th>Day & Time</th>
+	<th>Location</th>
+	<th>Action</th>
+</tr>
+@for(CourseListing <- myCourseListing){
+<tr>
+<td>@CourseListing.courseId - @CourseListing.cname</td>
+<td>@CourseListing.day @CourseListing.time</td>
+<td>@CourseListing.location</td>
+<td>@form(routes.MyProfCourses.viewRoster(professor.getID(), CourseListing.courseSectionId)) {
+<button class="btn btn-default btn-sm" type="submit">View Roster</button>}</td>
+</tr>
+}
+</table>
+</div><!-- end second widget -->
+
+</div><!-- CLOSE MAIN DIV -->
+}

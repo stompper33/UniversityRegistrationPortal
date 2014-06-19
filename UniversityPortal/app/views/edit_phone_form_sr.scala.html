@@ -1,0 +1,40 @@
+@(retStudent: com.universityregistration.model.User.Student, phoneForm: Form[com.universityregistration.model.User.PhoneNumber], roleType: java.lang.String, pid: java.lang.Integer)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Add a phone number
+}
+@studentMain(retStudent, nav="wizard"){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Edit Phone Contact</h1>
+				</div>
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.EditStudentController.submitEditedPhoneSR(pid)){
+	
+		<legend>Phone Number</legend>
+		<div class="row">
+		<div class="col-lg-3">
+		@inputText(
+            phoneForm("phonenumber"), 
+            '_label -> "Phonenumber *", 
+            'class -> "form-control",
+            '_error -> phoneForm.globalError
+         )
+		</div>
+		</div>
+		
+		<input type="hidden" name="type" value="@roleType">
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn btn-primary btn-md">Update</button>
+			<a class ="btn btn-link" href="@routes.EditStudentController.backToStudProfileHomeSR()">Cancel</a> 
+		</div><br>
+	}
+	</div>
+	</div>
+}

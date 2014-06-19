@@ -1,0 +1,94 @@
+@(studentForm: Form[com.universityregistration.model.User.Student])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Basic Student Information
+}
+@adminMain2(title, nav="wizard"){
+
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Edit Student</h1>
+				</div>
+	<div class="contentWrapper"><br>
+
+	@helper.form(action = routes.EditStudentController.updateBasicStudent()){
+
+
+		<legend>Student Personal Information</legend>
+		<div class="row">
+		<div class="col-lg-3">	
+		@inputText(
+            studentForm("firstName"), 
+            '_label -> "First Name *", 
+            'class -> "form-control",
+            '_error -> studentForm.globalError
+        )
+        </div>
+		<div class="col-lg-3">	        
+		@inputText(
+            studentForm("lastName"),
+            '_label -> "Last Name *",
+            'class -> "form-control",
+            '_error -> studentForm.globalError
+        )
+		</div>		
+		</div>        
+        
+		<div class="row">
+		<div class="col-lg-3">	
+		@inputText(
+            studentForm("dob"), 
+            '_label -> "Date of Birth *", 
+            'class -> "form-control",
+            '_error -> studentForm.globalError
+        )
+		</div>
+		</div>
+        
+		<div class="row">
+		<div class="col-lg-3">	
+		@inputText(
+			studentForm("ssn"),
+			'_label -> "Social Security No.",
+			'class -> "form-control",
+			'readonly -> "readonly",
+			'_error -> studentForm.globalError
+		)
+		</div>
+		</div>
+				
+		<div class="row">
+		<div class="col-lg-3">	
+		@inputText(
+			studentForm("major"),
+			'_label -> "Major *",
+			'class -> "form-control",
+			'_error -> studentForm.globalError
+		)
+		</div>
+		</div>
+			
+		<div class="row">
+		<div class="col-lg-3">	
+		@select(
+			studentForm("classLevel"),
+			options = options("0" -> "undergraduate", "1"->"graduate"),
+			'_default -> "--- Choose a class level ---",
+            '_label -> "Class level *",
+            'class -> "form-control"
+		)
+		</div>
+		</div>
+		<br>
+		<div class="actions">
+			<button type="submit" class="btn  btn-primary btn-md">Save</button>
+			<a class ="btn btn-link" href="@routes.EditStudentController.backToStudProfileHome()">Cancel</a>
+		</div>
+		<br>
+	}
+</div>
+</div>
+}

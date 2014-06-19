@@ -1,0 +1,92 @@
+@(courses: java.util.List[com.universityregistration.model.Course.Course], professors: java.util.List[com.universityregistration.model.User.Professor], courseSectionForm: Form[CreateCourseSection.NewCourseSection])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Create Catalog"), nav="courseOptions") {
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Create Course Offering</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px"><br>
+
+    @helper.form(action = routes.CreateCourseSection.submit()) {
+
+            <legend>Course Information</legend>
+            <div class="row">
+			<div class="col-lg-4">            
+			
+        @select(
+            courseSectionForm("catId"), 
+            options = options(GeneralController.listOfAllCatalogId),
+            '_default -> "--- Term ---",
+            '_label -> "Catalog *",
+            'required -> "required",
+            'class -> "form-control"
+            
+        )
+        </div></div>
+			            <div class="row">
+			<div class="col-lg-4">
+        @select(
+            courseSectionForm("courseId"), 
+            options = options(GeneralController.listOfAllCourseId),
+            '_default -> "--- Course ---",
+            'class -> "form-control",
+            'required -> "required",
+            '_label -> "Course Id *"
+        )
+        </div></div>
+	            <div class="row">
+			<div class="col-lg-4">
+        @select(
+            courseSectionForm("instructor_ssn"), 
+            options = options(GeneralController.listOfAllProfessorId),
+            '_default -> "--- Instructor ---",
+            'class -> "form-control",
+            'required -> "required",
+            '_label -> "Instructor *"
+        )
+        </div></div>
+		            <div class="row">
+			<div class="col-lg-4">
+		@inputText(
+			courseSectionForm("location"),
+            '_label -> "Location *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> courseSectionForm.globalError
+		)
+		</div></div>
+            <div class="row">
+			<div class="col-lg-4">
+		@inputText(
+			courseSectionForm("day"),
+            '_label -> "Day *",
+            'class -> "form-control",
+            'required -> "required",
+            '_error -> courseSectionForm.globalError
+		)
+		</div></div>
+		            <div class="row">
+			<div class="col-lg-4">
+		@inputText(
+			courseSectionForm("time"),
+			'_label -> "Time *",
+			'class -> "form-control",
+			'required -> "required",
+			'_error -> courseSectionForm.globalError
+		)
+		</div></div>
+<br>
+            <button type="submit" class="btn btn-primary">Create</button>
+			<a class ="btn btn-link" href="@routes.CourseOptions.loadOptions()">Cancel</a>
+			
+ <br>
+    }<br>
+</div>
+</div>
+
+}
+
+

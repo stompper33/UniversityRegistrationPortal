@@ -1,0 +1,31 @@
+@(student: com.universityregistration.model.User.Student, catalogList: java.util.HashMap[String,String], searchCatalogBoxForm: Form[MyStudCourses.SearchCatalogBox])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@studentMain(student, nav="academics") {
+    			<div class="col-md-9">
+				<div style="margin-bottom: 15px">
+				<h1 class="page-title">Course Registration</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+
+    @helper.form(action = routes.MyStudCourses.searchCatalogSubmit(student.getID())) {
+
+<legend>Course Catalog</legend>
+<div class="row">
+<div class="col-md-3">
+            @select(
+                searchCatalogBoxForm("catalogId"),
+                options = options(GeneralController.listOfAllCatalogId()),
+                '_default -> "--- Term ---",
+                '_label -> "",
+                'class -> "form-control"
+            )<br>
+            </div></div>
+			<button class="btn btn-primary btn-md" type="submit">Search</button>
+			<a class ="btn btn-link" href="@routes.AcademicsController.diplayStudentAcademicOptions(student.getID())">Cancel</a>
+}<br>
+</div>
+</div>
+}

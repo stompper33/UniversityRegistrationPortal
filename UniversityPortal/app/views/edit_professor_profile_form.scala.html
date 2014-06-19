@@ -1,0 +1,56 @@
+@(professorForm: Form[com.universityregistration.model.User.Professor], roleType: java.lang.String, sid: java.lang.String)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+	Basic Information
+}
+@adminMain2(title, nav="wizard"){
+	@helper.form(action = routes.EditProfessorController.updateBasicProfessor()){
+	
+	<fieldset>
+
+		<legend>Professor Information</legend>
+
+		@inputText(
+            professorForm("firstName"), 
+            '_label -> "First Name", 
+            '_help -> "First name required.",
+            '_error -> professorForm.globalError
+        )
+        
+		@inputText(
+            professorForm("lastName"),
+            '_label -> "Last Name",
+            '_help -> "Last name required.",
+            '_error -> professorForm.globalError
+        )
+        
+		@inputText(
+            professorForm("dob"), 
+            '_label -> "Date of Birth", 
+            '_help -> "Birthdate required.",
+            '_error -> professorForm.globalError
+        )
+		@inputText(
+			professorForm("ssn"),
+			'_label -> "Social Security No.",
+			'_help -> "Social security number required.",
+			'_error -> professorForm.globalError
+		)
+		
+		@inputText(
+			professorForm("department"),
+			'_label -> "Department",
+			'_help -> "Department required.",
+			'_error -> professorForm.globalError
+		)
+		
+		</fieldset>
+		
+		<div class="actions">
+			<input type="submit" name="action" class="btn primary" value="Save">
+		</div>
+	}
+}

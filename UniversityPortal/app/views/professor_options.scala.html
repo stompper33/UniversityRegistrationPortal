@@ -1,0 +1,26 @@
+@adminMain2(Html("Form samples"), nav="professorOptions") {
+			<div class="col-md-9">
+				<h1 class="page-title">Manage Professors</h1>    
+<div style="padding-top: 20px">
+ <div class= "row">
+	 <div class="col-md-3">
+		 <a href="@routes.BasicProfessor.blank" class="thumbnail">
+		  <figure style="margin: 0px auto;">
+			<img src ="@routes.Assets.at("images/addProfessor_256.png")" alt="">
+			<figcaption><font size="4">Add Professor</font></figcaption>
+		  </figure>
+		 </a>
+	 </div>
+	 <div class="col-md-3">
+		  <a href="@routes.EditProfessorController.blank2" class="thumbnail">
+		  <figure style="margin: 0px auto;">
+			<img src ="@routes.Assets.at("images/getProfessorInfo_256.png")" alt="">
+			<figcaption><font size="4">Professor Details</font></figcaption>
+		  </figure>
+		 </a>
+	 </div>
+ 
+ </div><!-- close row --> 
+ </div>
+ </div>
+}

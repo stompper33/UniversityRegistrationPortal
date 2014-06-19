@@ -1,0 +1,42 @@
+@(catalogForm: Form[com.universityregistration.model.Course.CourseCatalog])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@adminMain2(Html("Create Catalog"), nav="courseOptions") {
+        			<div class="col-md-9">
+					<div style="margin-bottom: 15px">
+				<h1 class="page-title">Create Catalog</h1>
+				</div>
+<div class="contentWrapper" style="padding-top: 20px">
+    @helper.form(action = routes.CreateCatalog.submit()) {
+		
+            <legend>Catalog Information</legend>
+<div class="row">
+		<div class="col-lg-4">	
+            @select(
+                catalogForm("term"),
+                options = options("SUMMER"->"SUMMER", "FALL" -> "FALL", "WINTER"->"WINTER", "SPRING" -> "SPRING"),
+                '_default -> "--- Select Term ---",
+                '_label -> "Term *",
+                'required -> "required",
+                'class -> "form-control"
+            )
+		</div>
+		<div class="col-lg-3">
+            @inputText(
+                catalogForm("year"), 
+                '_label -> "Year *",
+                'class -> "form-control",
+                'required -> "required",
+                '_error -> catalogForm.globalError
+            )
+	</div></div>
+			<br>
+            <button type="submit" class="btn btn-primary">Create Catalog</button>
+			<a class ="btn btn-link" href="@routes.CourseOptions.loadOptions()">Cancel</a>
+		
+    }<br>
+</div>
+</div>
+}

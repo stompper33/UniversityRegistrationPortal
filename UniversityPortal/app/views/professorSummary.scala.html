@@ -1,0 +1,28 @@
+@(user: com.universityregistration.model.User.Professor)
+
+@adminMain2(Html("Professor Account created!"), nav = "signup") {
+    
+    <h2>Professor account created for:</h2>
+    
+    <h6>Name</h6>
+    
+    <p>
+        @user.getFirstName() @user.getLastName()
+    </p>
+	
+    <h6>SSN</h6>
+    
+    <p>
+        @user.getSsn()
+    </p>
+	
+	<h6>DOB</h6>
+	<p>
+		@user.getDob()
+	</p>
+	    
+	<h6>Department</h6>
+	<p>
+		@user.getDepartment()
+	</p>
+}
